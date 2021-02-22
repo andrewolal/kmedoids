@@ -125,8 +125,8 @@ precomputed.
 
 ## A usage example
 
-I found some data for testing clustering [here](). Its all
-synthetic, and I've left a few CSVs in the data/ folder
+I found some data for testing clustering [here](http://cs.joensuu.fi/sipu/datasets/).
+Its all synthetic, and I've left a few CSVs in the data/ folder
 if you want to play around. In this example I'll use
 s1_15_clusters.csv which is a bunch of Gaussians with good
 separation. There are 15 clusters. First thing we nee to do
@@ -171,7 +171,7 @@ The code above calls kmbest for 2<=k<=30. Lets graph it:
     pd (x;aic)
     pd 'show'
 
-![alt text](https://github.com/emiruz/kmedoids/blob/master/s1_aic.jpg?raw=true)
+![k vs AIC](https://github.com/emiruz/kmedoids/blob/main/img/s1_aic.png?raw=true)
 
 Conveniently, AIC flat-lines at k=15, so we can just
 grab the corresponding results from the tests array:
@@ -190,7 +190,7 @@ Lets plot the elemplars on off the data:
     pd 'pensize 3.1'
     pd ;/ |: (> 13 { tests) { data
 
-![alt text](https://github.com/emiruz/kmedoids/blob/master/s1_clusters.jpg?raw=true)
+![Data vs exemplars](https://github.com/emiruz/kmedoids/blob/main/img/s1_clusters.png?raw=true)
 
 # Status
 
@@ -202,6 +202,7 @@ outcomes.
 # Todo
 
 - [ ] Smoke tests
+- [ ] References
 
 # Contributions
 
