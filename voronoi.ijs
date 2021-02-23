@@ -45,7 +45,7 @@ kmAIC=: 1 : 0
 lb=. x u kmlabels y
 pars=. (;/ x),.(lb </. i. #lb)                            NB. Partition data by medoid cluster
 lik=. (({&y@:>@:{.) liks_km_ ({&y@:>@:{:)) "1 pars        NB. Apply lik_step for each medoid
-(2*#x)-+/lik                                              NB. Sum likelihood, calc. AIC
+(2*#x)-2*(+/lik)                                          NB. Sum likelihood, calc. AIC
 )
 
 NB. Best of N.

@@ -159,10 +159,10 @@ The code above calls kmbest for 2<=k<=30. Lets graph it:
 
 ![k vs AIC](https://github.com/emiruz/kmedoids/blob/main/img/s1_aic.png?raw=true)
 
-Conveniently, AIC flat-lines at k=15, so we can just
+Conveniently, AIC flat-lines at k=16, so we can just
 grab the corresponding results from the tests array:
 
-    > 13 { tests
+    > 14 { tests
 
 Lets plot the elemplars on off the data:
 
@@ -174,7 +174,7 @@ Lets plot the elemplars on off the data:
     pd ;/ |: data
     pd 'color red'
     pd 'pensize 3.1'
-    pd ;/ |: (> 13 { tests) { data
+    pd ;/ |: (> 14 { tests) { data
 
 ![Data vs exemplars](https://github.com/emiruz/kmedoids/blob/main/img/s1_clusters.png?raw=true)
 
