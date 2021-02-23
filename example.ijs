@@ -7,7 +7,7 @@ NB. Make AIC dataset
 ex_file=: './data/s1_15_clusters.csv'
 data=: makenum readcsv ex_file                          NB. Read the CSV
 k=: (2 + i. 29)                                         NB. Cluster sizes to test
-tests=: (ed_km_ kmbest & data) each { k;20              NB. Best of 10 for each size
+tests=: (ed_km_ kmbest & data) each { k;20              NB. Best of 20 for each k
 aic=: ,> (ed_km_ kmAIC & data @: ,) each tests          NB. AIC for each size
 
 
