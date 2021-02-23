@@ -66,35 +66,21 @@ convergent.
 
 ## Goodness of fit
 
-*Inertia* (sum of distances to the nearest exemplar) is
-typically how goodness of fit is measured. For example, if
-you ran the algorithm 100 times with the same parameters,
-you could use intertia to decide which run to use. However,
-it doesn't work if k also varies between runs, because
-bigger k will usually mean lower intertia. However, we can
-get around this problem by using the AIC score instead which
-considers not just how well the model fits but also how many
-parameters it has. It so happens that k-medoids has enough in
-common with Gaussian mixture models (GMM) that the latter can
-be used as a working model to analyse k-medoids results. We
-can use the exemplars as the means and we can use the sample
-standard deviations within clusters - under diagonal
-covariance assumptions- to create a covariance matrix. We can
-treat each cluster as a multivariate Gaussian, and combine
-them together proportionally to the number of points in each
-cluster into a Gaussian mixture. This allows us to calculate
-the log likelihood for our working model and then to plug it
-into AIC - along with the number of clusters - in order to
-obtain an AIC score. We can use the AIC score to compare
-different runs with the same k but also runs with different
-k parameters, thus enabling an effective way to discover
-k which is shown in the example below.
+It so happens that k-medoids has enough in common with Gaussian
+mixture models (GMM) that the latter can be used as a working
+model to analyse k-medoids results. The reason this is useful
+is that it allows me to build a likelihood function which I
+can then in turn use to calculate the AIC score. The AIC score
+takes into account both relative model fit and the number of
+parameters (k) and therefore penalises complexity. This makes
+it possible to compare both k-medoid runs with the same and
+different k parameters.
 
 # *Caveat emptor*
 
 1. This class of algorithms (including PAM et al) are local
 optimisers and depend heavily on the initial value. Its easy
-for the algorithm to fall into local optimums and therefore
+for the algorithm to fall into a local optimum and therefore
 it is necessary to try many different starting points.
 
 2. To make it viable for at least mid-sized data
@@ -168,7 +154,7 @@ The code above calls kmbest for 2<=k<=30. Lets graph it:
     pd 'pensize 2.1'
     pd 'color gray'
     pd 'title k vs AIC;ycaption AIC;xcaption k'
-    pd (x;aic)
+    pd (k;aic)
     pd 'show'
 
 ![k vs AIC](https://github.com/emiruz/kmedoids/blob/main/img/s1_aic.png?raw=true)
@@ -202,6 +188,7 @@ outcomes.
 # Todo
 
 - [ ] Smoke tests
+
 - [ ] References
 
 # Contributions
@@ -211,3 +198,17 @@ Yes please. Better, faster, stronger : I'll gratefully accept.
 # License
 
 GPL3, please see the LICENSE file for details.
+
+# References
+
+Data prefixed with "s1"-"s4" comes from:
+
+    Fränti and O. Virmajoki, "Iterative shrinking method for clustering problems", Pattern Recognition, 39 (5), 761-765, May 2006.
+
+Data prefixed "birch" comes from:
+
+    Zhang et al., "BIRCH: A new data clustering algorithm and its applications", Data Mining and Knowledge Discovery, 1 (2), 141-182, 1997.
+
+Data prefixed "d32" comes from:
+
+    P. Fränti, O. Virmajoki and V. Hautamäki, "Fast agglomerative clustering using a k-nearest neighbor graph", IEEE Trans. on Pattern Analysis and Machine Intelligence, 28 (11), 1875-1881, November 2006.
