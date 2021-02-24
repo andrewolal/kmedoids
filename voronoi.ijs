@@ -7,7 +7,7 @@ cocurrent 'z'
 NB. Utility functions
 small_km_=: 0.00000001
 ed_km_=: 4 : 0                                             NB. Euclidean distance
-row=. +/ @: *: @: (- & (|: y))
+row=. 2%: +/ @: *: @: (- & (|: y))
 row "1 x
 )
 id_km_=: 3 : '(y,y) $ ((y+1){.1)'                          NB. Identity matrix
@@ -34,7 +34,7 @@ NB. GMM based AIC calculation.
 NB. Usage: medoids dist_func kmAIC data -> AIC
 liks_km_=: 4 : 0
 m=. (stddev y)+small_km_
-cov=. %. (id_km_ #x) * m                                  NB. Inverse cov. of spherical Gaussian
+cov=. %. (id_km_ #x) * m                                  NB. Inverse cov. of Gaussian
 det=. ^. (*/ m)                                           NB. Determinant of diagonal matrix
 lik=. dot_km_ (cov & dot_km_)
 lik=. +/(lik @:-&x) "1 y
