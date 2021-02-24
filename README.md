@@ -47,8 +47,9 @@ gist of it. In more words:
 
 1. Initialisation - pick the first point at random, put it in
 the exemplar set. If the size of the exemplar set is less than
-k, pick the point furthest from the closest exemplar and add
-it. Keep doing this until there are k exemplars.
+k, pick the point furthest from the closest exemplar already
+in the set and add it to the set.Keep doing this until there
+are k exemplars.
 
 2. Classify - assign all points to their closest exemplars
 according to a user specified distance function.
@@ -74,9 +75,9 @@ can then in turn use to calculate the AIC score. The AIC score
 takes into account both relative model fit and the number of
 parameters (k) and therefore penalises complexity. This makes
 it possible to compare both k-medoid runs with the same and
-different k parameters.
+different k parameters. An example of this is shown later on.
 
-# *Caveat emptor*
+# Caveat emptor
 
 1. This class of algorithms (including PAM et al) are local
 optimisers and depend heavily on the initial value. Its easy
@@ -85,11 +86,20 @@ it is necessary to try many different starting points.
 
 2. To make it viable for at least mid-sized data
 (e.g. 100k-300k rows) the distance matrix is not precomputed,
-the down side of which lots and lots of recomputation.
+the down side of which is lots of recomputation.
 The algorithm spends the vast majority of its run time
 recomputing distances. Its fairly fast nonetheless, but not
-really as fast it would be if the distance matrix was
+nearly as fast it would be if the distance matrix was
 precomputed.
+
+3. Voronoi iterations are otherwise known as Lloyd's algorithm
+which with the right objective is otherwise known as k-means.
+In fact the only difference here is that I am minimising
+distances from exemplars as opposed to looking for centroids
+which minimise cluster variance. For some problems - including
+the example given below - kmeans may be what you actually want:
+in context, k-medoids is a less popular  algorithm generally
+speaking.
 
 # Usage
 
