@@ -6,8 +6,8 @@ cocurrent 'z'
 
 NB. Utility functions
 small_km_=: 0.00000001
-ed_km_=: 4 : 0                                             NB. Euclidean distance
-row=. +/ @: *: @: (- & (|: y))
+abs_km_=: 4 : 0                                            NB. Absolute distance
+row=. +/ @: | @: (- & (|: y))
 row "1 x
 )
 id_km_=: 3 : '(y,y) $ ((y+1){.1)'                          NB. Identity matrix

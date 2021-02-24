@@ -135,16 +135,16 @@ is load the data:
 If we already knew k and just wanted to do some quantising
 we could write:
 
-    15 ed_km_ km data
+    15 abs_km_ km data
 
 This function returns the index of 15 exemplars. The key
 function is **km**. It is an adverb, and takes a distance
-function to its left: **ed_km_**, squared Euclidean distance.
+function to its left: **abs_km_**, absolute distance.
 The right most argument is the data and the left most
 argument is k. If we wanted to instead to run the algorithm
 many times and return just the best run we could write:
 
-    (15;50) ed_km_ kmbest data
+    (15;50) abs_km_ kmbest data
 
 This is akin to running **km ** 50 times and keeping the
 indexes from the run with the lowest AIC score.
@@ -154,8 +154,8 @@ various possibilities for k, plot that against the
 corresponding AIC scores and then decide which to use:
 
     k=:(2 + i. 29)
-    tests=:(ed_km_ kmbest & data) each { k;50
-    aic=: ,> (ed_km_ kmAIC & data @: ,) each tests
+    tests=:(abs_km_ kmbest & data) each { k;50
+    aic=: ,> (abs_km_ kmAIC & data @: ,) each tests
 
 The code above calls kmbest for 2<=k<=30. Lets graph it:
 
@@ -169,7 +169,7 @@ The code above calls kmbest for 2<=k<=30. Lets graph it:
 
 ![k vs AIC](https://github.com/emiruz/kmedoids/blob/main/img/s1_aic.png?raw=true)
 
-Conveniently, AIC flat-lines at k=16, so we can just
+Conveniently, AIC flat-lines at k=15, so we can just
 grab the corresponding results from the tests array:
 
     > 14 { tests
@@ -184,7 +184,7 @@ Lets plot the elemplars on off the data:
     pd ;/ |: data
     pd 'color red'
     pd 'pensize 3.1'
-    pd ;/ |: (> 14 { tests) { data
+    pd ;/ |: (> 13 { tests) { data
 
 ![Data vs exemplars](https://github.com/emiruz/kmedoids/blob/main/img/s1_clusters.png?raw=true)
 
